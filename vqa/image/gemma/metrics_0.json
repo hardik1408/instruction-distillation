@@ -1,0 +1,49 @@
+{
+  "predictions_file": "image/gemma/predictions_zero_shot.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.5243,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.6882
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.2664
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.4879
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.5372
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.5479
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.425
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.3498
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.4616
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.175
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.8041
+    }
+  }
+}

@@ -1,0 +1,905 @@
+{
+  "model": "qwen",
+  "methods": {
+    "approach1_rerank_k1": {
+      "accuracy": 0.6218353227400547,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 1,
+        "avg_input_tokens": 962,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 965,
+        "total_tokens": 12692645,
+        "total_input_tokens": 12653186,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000146,
+        "estimated_cost_usd": 1.92
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8183560987299308
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.3828100222010782
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6767543859649127
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6186213070725162
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6674290942360473
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.4163027656477439
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.41136023916292924
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5689270932823941
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.21169036334913133
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8544908544908543
+        }
+      }
+    },
+    "approach1_rerank_k10": {
+      "accuracy": 0.6465445145594122,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 10,
+        "avg_input_tokens": 2132,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 2135,
+        "total_tokens": 28081655,
+        "total_input_tokens": 28042196,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000322,
+        "estimated_cost_usd": 4.23
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8300982506589986
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4094513162067873
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6864035087719302
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6481647269471806
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6870997255260747
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5254730713245996
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.4642750373692072
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6014008277618594
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.24960505529225924
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8675948675948671
+        }
+      }
+    },
+    "approach1_rerank_k15": {
+      "accuracy": 0.6484959071441206,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 15,
+        "avg_input_tokens": 2782,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 2785,
+        "total_tokens": 36631105,
+        "total_input_tokens": 36591646,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000419,
+        "estimated_cost_usd": 5.51
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8353702372393957
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.42118617189977786
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6857456140350878
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6433900328260228
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.685422384873437
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.544395924308588
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.4594917787742897
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5943966889525631
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.2546603475513429
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8753753753753755
+        }
+      }
+    },
+    "approach1_rerank_k2": {
+      "accuracy": 0.6257634506703125,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 2,
+        "avg_input_tokens": 1092,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 1095,
+        "total_tokens": 14402535,
+        "total_input_tokens": 14363076,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000166,
+        "estimated_cost_usd": 2.18
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8190750059908937
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4024738344433871
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6484649122807022
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6192181438376607
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.66254955779201
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.46870451237263466
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.4337817638266063
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5918497293855465
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.21706161137440788
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8611793611793607
+        }
+      }
+    },
+    "approach1_rerank_k25": {
+      "accuracy": 0.6519678653792508,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 25,
+        "avg_input_tokens": 4082,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 4085,
+        "total_tokens": 53730005,
+        "total_input_tokens": 53690546,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000614,
+        "estimated_cost_usd": 8.08
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.834172058471124
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4307009197589597
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6984649122807023
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6433900328260227
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6846599573040556
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5298398835516739
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.47443946188340724
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6154091053804522
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.2546603475513431
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8689598689598688
+        }
+      }
+    },
+    "approach1_rerank_k3": {
+      "accuracy": 0.6309840594034279,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 3,
+        "avg_input_tokens": 1222,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 1225,
+        "total_tokens": 16112425,
+        "total_input_tokens": 16072966,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000185,
+        "estimated_cost_usd": 2.43
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8241073568176376
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.3901046622264508
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.664912280701755
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6284691136974043
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6767307105824942
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5021834061135373
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.4367713004484301
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5756128621458139
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.23317535545023713
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8600873600873598
+        }
+      }
+    },
+    "approach1_rerank_k5": {
+      "accuracy": 0.6402088243493212,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 5,
+        "avg_input_tokens": 1482,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 1485,
+        "total_tokens": 19532205,
+        "total_input_tokens": 19492746,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000224,
+        "estimated_cost_usd": 2.95
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8329738797028515
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4015223596574691
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.6752192982456143
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6424947776783055
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6707837755413233
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.49053857350800595
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.46846038863976
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5918497293855464
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.24834123222748836
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.8654108654108653
+        }
+      }
+    },
+    "approach1_rerank_k8": {
+      "accuracy": 0.6445170936921824,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "approach1_rerank",
+        "k": 8,
+        "avg_input_tokens": 1872,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 1875,
+        "total_tokens": 24661875,
+        "total_input_tokens": 24622416,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000283,
+        "estimated_cost_usd": 3.72
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8334531512101602
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4107199492546781
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.686842105263158
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.6395105938525818
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.6793229643183891
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5181950509461427
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.45829596412555995
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.5969436485195798
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.2540284360189575
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.868277368277368
+        }
+      }
+    },
+    "few_shot_rerank_k1": {
+      "accuracy": 0.6933779365924081,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 1,
+        "avg_input_tokens": 1598,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 1601,
+        "total_tokens": 21057953,
+        "total_input_tokens": 21018494,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000241,
+        "estimated_cost_usd": 3.18
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8610112628804218
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.458928005074532
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7142543859649131
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.695314831393614
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.743671851174139
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5327510917030568
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.49865470852017885
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6310092327284303
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.2906793048973145
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9445809445809452
+        }
+      }
+    },
+    "few_shot_rerank_k10": {
+      "accuracy": 0.7117007526799943,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 10,
+        "avg_input_tokens": 8762,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 8765,
+        "total_tokens": 115286045,
+        "total_input_tokens": 115246586,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.001316,
+        "estimated_cost_usd": 17.31
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8602923556194579
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.49762131303520446
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7348684210526321
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7156072814085349
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7448917352851478
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5822416302765647
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.5455904334828098
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6631645972620186
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.3308056872037912
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9466284466284471
+        }
+      }
+    },
+    "few_shot_rerank_k2": {
+      "accuracy": 0.6993081426290553,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 2,
+        "avg_input_tokens": 2394,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 2397,
+        "total_tokens": 31527741,
+        "total_input_tokens": 31488282,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000361,
+        "estimated_cost_usd": 4.75
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8614905343877307
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4757373929590865
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7232456140350877
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7024768725753506
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7395547422994818
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.519650655021834
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.5207772795216742
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6335561922954474
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.30173775671405995
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9490854490854496
+        }
+      }
+    },
+    "few_shot_rerank_k3": {
+      "accuracy": 0.7027801008641851,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 3,
+        "avg_input_tokens": 3190,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 3193,
+        "total_tokens": 41997529,
+        "total_input_tokens": 41958070,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.00048,
+        "estimated_cost_usd": 6.32
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8631679846633121
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4836663495084044
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7221491228070175
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7120262608176665
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7435193656602622
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5327510917030568
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.52286995515695
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6332378223495704
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.3162717219589256
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9478569478569482
+        }
+      }
+    },
+    "few_shot_rerank_k5": {
+      "accuracy": 0.7074685116196523,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 5,
+        "avg_input_tokens": 4782,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 4785,
+        "total_tokens": 62937105,
+        "total_input_tokens": 62897646,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000719,
+        "estimated_cost_usd": 9.46
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8622094416486941
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.48176339993656825
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7236842105263156
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7123246792002388
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7458066483684042
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5749636098981079
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.5420029895366213
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6488379496975488
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.3200631911532384
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9503139503139508
+        }
+      }
+    },
+    "few_shot_rerank_k8": {
+      "accuracy": 0.7071137129678875,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "few_shot_rerank",
+        "k": 8,
+        "avg_input_tokens": 7170,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 7173,
+        "total_tokens": 94346469,
+        "total_input_tokens": 94307010,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.001077,
+        "estimated_cost_usd": 14.17
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8658039779535103
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.4823977164605137
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.7291666666666667
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7132199343479558
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7426044525770051
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5342066957787481
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.5473841554559039
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6542502387774595
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.32195892575039486
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.9433524433524438
+        }
+      }
+    },
+    "zero_shot": {
+      "accuracy": 0.7274639499227026,
+      "total_questions": 13153,
+      "successful_predictions": 13153,
+      "error_count": 0,
+      "token_cost": {
+        "method_type": "zero_shot",
+        "k": 0,
+        "avg_input_tokens": 803,
+        "avg_output_tokens": 3,
+        "total_tokens_single": 806,
+        "total_tokens": 10601318,
+        "total_input_tokens": 10561859,
+        "total_output_tokens": 39459,
+        "estimated_cost_single_usd": 0.000122,
+        "estimated_cost_usd": 1.61
+      },
+      "by_question_type": {
+        "color": {
+          "count": 1391,
+          "accuracy": 0.8717948717948721
+        },
+        "how": {
+          "count": 1051,
+          "accuracy": 0.45987947986045014
+        },
+        "number": {
+          "count": 1520,
+          "accuracy": 0.8138157894736847
+        },
+        "other": {
+          "count": 1117,
+          "accuracy": 0.7156072814085351
+        },
+        "what": {
+          "count": 2186,
+          "accuracy": 0.7572430619091192
+        },
+        "when": {
+          "count": 229,
+          "accuracy": 0.5181950509461425
+        },
+        "where": {
+          "count": 1115,
+          "accuracy": 0.5784753363228697
+        },
+        "who": {
+          "count": 1047,
+          "accuracy": 0.6921362623368358
+        },
+        "why": {
+          "count": 1055,
+          "accuracy": 0.31721958925750393
+        },
+        "yes_no": {
+          "count": 2442,
+          "accuracy": 0.965465465465466
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+# VQA v2.0 Dataset Paths
+dataset:
+  vqa2_questions_path: "annotations/v2_OpenEnded_mscoco_train2014_questions.json"
+  vqa2_annotations_path: "annotations/v2_mscoco_train2014_annotations.json"
+  vqa2_images_dir: "train2014/"
+  images_per_category: 1000  # Number of images to sample per question type
+
+# Model Configuration
+models:
+  gemma:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+  qwen:
+    full_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+  phi:
+    full_name: "microsoft/Phi-3.5-vision-instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+  llama:
+    full_name: "meta-llama/Llama-3.2-11B-Vision-Instruct"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+  llava:
+    full_name: "llava-hf/llava-1.5-7b-hf"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+inference:
+  temperature: 0.2
+  max_tokens_instruction: 512  # For instruction generation
+  max_tokens_inference: 150     # For answer inference
+
+experiment:
+  top_k_retrieval: [1,2, 3, 5]  # K values for retrieval-based methods
+  max_workers: 12               # Parallel processing workers
+  clip_model: "ViT-B-32"      # CLIP model for embeddings (ViT-B/32 or ViT-L/14)
+
+output:
+  subset_dir: "vqa2_subset"
+  subset_path: "data/vqa2_subset.json"
+  question_embeddings_path: 'data/question_embeddings.npy'
+  image_base_dir: "image"
+
+  instruction_base_dir: "instruction"
+
+  hybrid_base_dir: "hybrid"
+
+  embeddings_path: "data/clip_embeddings.npy"
+
+  results_dir: "results/"
+  figures_dir: "results/figures/"
+
+prompts:
+  instruction_generation: |
+    You are an expert in visual question answering. Your task is to create generalizable reasoning instructions based on a specific example.
+
+    Below is an image with a question and its correct answer:
+
+    Question: {question}
+    Answer: {answer}
+    Question Type: {question_type}
+
+    Carefully analyze this example and create reasoning instructions that could help answer similar questions in the future. Your instructions should NOT simply describe this specific image, but rather extract generalizable reasoning strategies.
+
+    Think step-by-step:
+
+    1. **Visual cues to attend to**: What visual elements in the image are critical for answering this type of question? (objects, colors, spatial relationships, actions, text, etc.)
+
+    2. **Reasoning strategy**: What reasoning process should be applied? (object recognition, counting, spatial reasoning, attribute identification, commonsense reasoning, etc.)
+
+    3. **Common pitfalls**: What mistakes should be avoided when answering this type of question?
+
+    Now, synthesize your analysis into concise reasoning instructions (3-4 sentences) that describe:
+    - What visual features to focus on for {question_type} questions
+    - What reasoning approach to apply
+    - What common errors to avoid
+
+    Your instructions should be applicable to evaluating other images, not just describing this one. Be direct and clear. Do not ask any questions. Explicitly talk about features which helped you to determine the score.
+
+  zero_shot: |
+    Answer the following question about the image. Provide a concise answer (one or few words).
+
+    Question: {question}
+    Answer:
+
+  few_shot_system: |
+      You are answering visual questions. Study these examples carefully.
+
+  few_shot_example: |
+    Example {idx}:
+    Question: {question}
+    Answer: {answer}
+
+  few_shot_target: |
+    Now answer this question. Provide a concise answer(one or few words). Only output your answer. Be straight forward, no reasoning is required.:
+    Question: {question}
+    Answer:
+
+  approach1_system: |
+    You are an expert in visual question answering. Below are reasoning instructions from questions which involved simimlar images:
+
+  approach1_instruction: |
+    ## Instruction {idx}:
+    {instruction}
+
+  approach1_target: |
+    Apply these reasoning strategies to answer the following question. Only output your answer. Be straight forward, no reasoning is required. Provide a concise answer(one or few words):
+
+    Question: {question}
+    Answer:
+
+  hybrid_system: |
+    You are an expert in visual question answering. You will be given two types of in-context examples:
+    1. Visual examples: images paired with questions and their correct answers.
+    2. Reasoning instructions: text-based strategies derived from visually similar questions.
+    Study all examples and instructions carefully before answering.
+
+  hybrid_image_example: |
+    ## Visual Example {idx}:
+    Question: {question}
+    Answer: {answer}
+
+  hybrid_instruction_example: |
+    ## Reasoning Instruction {idx}:
+    Question: {question}
+    Answer: {answer}
+    Strategy: {instruction}
+
+  hybrid_target: |
+    Now answer the following question using both the visual examples and reasoning strategies above. Only output your answer. Be straight forward, no reasoning is required. Provide a concise answer (one or few words):
+
+    Question: {question}
+    Answer:

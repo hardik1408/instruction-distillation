@@ -1,0 +1,49 @@
+{
+  "predictions_file": "instruction/qwen/predictions_approach1_k1.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.6179832230923202,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.8070932183081708
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.3802727561052964
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.6644736842105267
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.610564010743062
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.6630070143336377
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.39155749636098985
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.4304932735426006
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.5756128621458136
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.2069510268562403
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.849303849303849
+    }
+  }
+}

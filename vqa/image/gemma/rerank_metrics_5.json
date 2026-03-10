@@ -1,0 +1,49 @@
+{
+  "predictions_file": "image/gemma/rerank_predictions_few_shot_k5.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.5560455155984648,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.7100407380781222
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.33872502378686964
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.5250000000000007
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.559236048940615
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.5690759377859107
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.4061135371179039
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.3991031390134525
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.5128939828080226
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.2211690363349133
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.8169533169533164
+    }
+  }
+}

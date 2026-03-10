@@ -1,0 +1,49 @@
+{
+  "predictions_file": "instruction/phi/rerank_predictions_approach1_k5.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.4991510175118459,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.641744548286605
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.32857595940374235
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.43070175438596486
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.543718293046852
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.4919182677645629
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.3740902474526929
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.29686098654708504
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.365170327921044
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.22938388625592432
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.7981162981162975
+    }
+  }
+}

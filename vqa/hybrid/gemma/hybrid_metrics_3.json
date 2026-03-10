@@ -1,0 +1,49 @@
+{
+  "predictions_file": "hybrid/gemma/predictions_hybrid_k3.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.540459717681641,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.6664270309130129
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.34887408816999665
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.48157894736842133
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.549686660698299
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.5657212564806349
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.45269286754002924
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.3727952167414048
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.4906080865966249
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.2230647709320697
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.8042588042588037
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "predictions_file": "image/qwen/rerank_predictions_few_shot_k3.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.7027801008641851,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.8631679846633121
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.4836663495084044
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.7221491228070175
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.7120262608176665
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.7435193656602622
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.5327510917030568
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.52286995515695
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.6332378223495704
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.3162717219589256
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.9478569478569482
+    }
+  }
+}

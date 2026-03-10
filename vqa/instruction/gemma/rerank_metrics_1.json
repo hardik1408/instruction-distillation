@@ -1,0 +1,49 @@
+{
+  "predictions_file": "instruction/gemma/rerank_predictions_approach1_k1.json",
+  "total_questions": 13153,
+  "successful_predictions": 13153,
+  "error_count": 0,
+  "total_accuracy": 0.5293849311944006,
+  "by_question_type": {
+    "color": {
+      "count": 1391,
+      "accuracy": 0.6647495806374316
+    },
+    "how": {
+      "count": 1051,
+      "accuracy": 0.31018078020932444
+    },
+    "number": {
+      "count": 1520,
+      "accuracy": 0.4804824561403509
+    },
+    "other": {
+      "count": 1117,
+      "accuracy": 0.5284989555356608
+    },
+    "what": {
+      "count": 2186,
+      "accuracy": 0.5675510826471488
+    },
+    "when": {
+      "count": 229,
+      "accuracy": 0.3682678311499273
+    },
+    "where": {
+      "count": 1115,
+      "accuracy": 0.3449925261584453
+    },
+    "who": {
+      "count": 1047,
+      "accuracy": 0.4648201209805789
+    },
+    "why": {
+      "count": 1055,
+      "accuracy": 0.19905213270142194
+    },
+    "yes_no": {
+      "count": 2442,
+      "accuracy": 0.8129948129948119
+    }
+  }
+}

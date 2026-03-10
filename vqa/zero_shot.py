@@ -163,7 +163,7 @@ def run_zero_shot_inference(model_name, config):
             )
             futures.append(future)
         
-        for future in tqdm(as_completed(futures), total=len(futures)):
+        for future in tqdm(as_completed(futures), total=len(futures), mininterval=10):
             try:
                 result = future.result()
                 results.append(result)
