@@ -1,0 +1,202 @@
+# Dataset Paths
+dataset:
+  pets_test_annotations_path: "data/pets_test_annotations.json"
+  pets_train_annotations_path: "data/pets_train_annotations.json"
+
+  pets_images_dir: "Pets"
+
+
+
+# Model Configuration
+models:
+  gemma:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  gemmaa:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8001/v1"
+    api_key: "skip"
+
+  gemma-alt:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+
+  qwen:
+    full_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+    api_base: "http://localhost:8001/v1"
+    api_key: "skip"
+
+  phi:
+    full_name: "microsoft/Phi-3.5-vision-instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  llama:
+    full_name: "meta-llama/Llama-3.2-11B-Vision-Instruct"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+
+
+# Inference Settings
+inference:
+  temperature: 0.2
+  max_tokens_instruction: 150
+  max_tokens_inference: 150
+
+
+# Experiment Settings
+experiment:
+  top_k_retrieval: [1, 2, 3, 5]
+  max_workers: 69
+  clip_model: "ViT-B-32"
+
+
+# Output Paths
+output:
+  embeddings_path: "data/clip_embeddings_train.npy"
+  test_embeddings_path: "data/clip_embeddings_test.npy"
+  instruction_base_dir: "instruction/"
+  image_base_dir: "image/"
+  results_dir: "results/"
+  figures_dir: "results/figures/"
+  hybrid_dir: "hybrid/"
+  hybrid_new_dir: "hybrid_new/"
+
+
+# Prompts
+prompts:
+  instruction_generation: |
+    You are an expert in animal morphology and veterinary visual identification. Your task is to generate generalizable identification rules for a pet breed that can be applied to ANY image of this type — not just the example shown.
+
+    Pet Breed: {label}
+
+    Generate exactly 3 identification rules in the following format:
+    1. To identify the [breed], look for [general visual cue]
+    2. To distinguish from similar breeds, focus on [differentiating characteristic]
+    3. To avoid misclassification, check [common confusion point and how to resolve it]
+
+    Rules must be:
+    - General enough to apply to any image of {label}, not just this one
+    - Focused on visual features observable in pet photography (coat color, texture, pattern, ear shape, face structure, body size, tail, distinguishing markings)
+    - Concise — one sentence each
+
+    Do not write paragraphs. Do not describe this specific image. Do not ask questions.
+
+  simple_caption_generation: |
+    You are an animal identification assistant. Generate a simple one-sentence caption for the pet breed shown in the image.
+
+    Pet Breed: {label}
+
+    Write a single sentence in the format: "This is a [breed], which typically has [2-3 key visual features]."
+
+    Do not write more than one sentence. Do not describe this specific image. Do not ask questions.
+
+  unstructured_paragraph_generation: |
+    You are an expert in animal morphology. Describe the visual appearance of the pet breed shown in the image in a short paragraph.
+
+    Pet Breed: {label}
+
+    Write 2-3 natural sentences covering coat color and texture, face structure, body proportions, and any distinctive markings observable in pet photography. Be descriptive and specific to this breed.
+
+    Do not use bullet points or numbered lists. Do not describe this specific image. Do not ask questions.
+
+  single_rule_generation: |
+    You are an expert in animal morphology and veterinary visual identification. Generate a single discriminative identification rule for the pet breed shown in the image.
+
+    Pet Breed: {label}
+
+    Generate exactly 1 rule in the following format:
+    To distinguish [breed] from similar breeds, focus on [key differentiating visual characteristic].
+
+    The rule must be concise — one sentence. Focus on the most visually distinctive feature that separates this breed from others it is commonly confused with.
+
+    Do not write more than one rule. Do not describe this specific image. Do not ask questions.
+
+  zero_shot: |
+    Identify the pet breed shown in the image.
+    Provide only the breed name. Do not output anything at all.
+
+  few_shot_system: |
+    You are an expert image classifier for pet breed recognition. Study the following examples carefully.
+
+  few_shot_example: |
+    Example {idx}:
+    Breed: {label}
+
+  few_shot_target: |
+    Now classify the following pet image.
+    Provide only the breed name. Do not output anything at all.
+
+  approach1_system: |
+    You are an expert pet breed classifier. Below are reasoning instructions derived from images from the Oxford-IIIT Pet dataset similar to the target image. Go through them carefully in order to classify the target image.
+
+  approach1_example: |
+    Instruction {idx}:
+    Label: {label}
+    Instruction: {instruction}
+
+  approach1_target: |
+    Apply the above reasoning strategies to classify the following image into a pet breed name. Relate the image with the instructions provided.
+    Provide only the breed name, similar to what is mentioned in the instructions provided. Generally it is same as the label of first retrieved instruction.
+
+  caption_system: |
+    You are an expert pet breed classifier. Below are brief descriptions of pet breeds similar to the target image. Study them carefully before classifying.
+
+  caption_target: |
+    Using the breed descriptions above, classify the following pet image.
+    Provide only the breed name. Do not output anything else.
+
+  paragraph_system: |
+    You are an expert pet breed classifier. Below are visual descriptions of pet breeds similar to the target image. Study them carefully before classifying.
+
+  paragraph_target: |
+    Using the breed descriptions above, classify the following pet image.
+    Provide only the breed name. Do not output anything else.
+
+  single_rule_system: |
+    You are an expert pet breed classifier. Below are discriminative identification rules for pet breeds similar to the target image. Study them carefully before classifying.
+
+  single_rule_target: |
+    Apply the discriminative rules above to classify the following pet image.
+    Provide only the breed name. Do not output anything else.
+
+  hybrid_system: |
+    You are an expert in fine-grained pet breed classification. You will be given two types of in-context examples:
+    1. Visual examples: pet images paired with their correct breed name.
+    2. Reasoning instructions: text-based strategies derived from visually similar pet images, describing how to identify the breed.
+    Your goal is to correctly identify the breed name of the target pet image. Study all examples and instructions carefully before answering.
+
+  hybrid_image_example: |
+    Example {idx}:
+    Breed: {label}
+
+  hybrid_instruction_example: |
+    Instruction Example {idx}
+    Label: {label}
+    Instruction: {instruction}
+
+  hybrid_target: |
+    Now predict the pet breed name using both the visual examples and reasoning strategies above. Provide only the breed name, do not output anything else. Use the visual examples and the instructions to answer the question based on the target image only. Do not get confused with the example images.
+    Give the exact breed name. Do not give a generic description. It is same as the label of first retrieved example.
+
+  hybrid_new_system: |
+    You are an expert in fine-grained pet breed classification. You will be given two types of in-context examples:
+    1. Reasoning instructions: text-based strategies derived from visually similar pet images, describing how to identify the breed.
+    2. Visual examples: pet images paired with their correct breed name.
+    Your primary guidance comes from the reasoning instructions. Use the visual examples as supplementary evidence. Study all instructions and examples carefully before answering.
+
+  hybrid_new_image_example: |
+    Visual Example {idx}:
+    Breed: {label}
+
+  hybrid_new_instruction_example: |
+    Reasoning Instruction {idx}:
+    Label: {label}
+    Instruction: {instruction}
+
+  hybrid_new_target: |
+    Now predict the pet breed name using the reasoning instructions and visual examples above. Provide only the breed name, do not output anything else. Apply the reasoning strategies first, then use the visual examples to confirm. Do not get confused with the example images.
+    Give the exact breed name. Do not give a generic description. It is same as the label of the first retrieved instruction.
