@@ -1,0 +1,210 @@
+# Dataset Paths
+dataset:
+  fgvc_test_annotations_path: "data/test.json"
+  fgvc_train_annotations_path: "data/train.json"
+
+  fgvc_images_dir: "fgvc-aircraft-2013b/"
+
+  images_per_class: 100
+  images_per_class_debug: 5
+
+
+# Model Configuration
+models:
+  gemma:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  gem:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+
+  gemmaa:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8001/v1"
+    api_key: "skip"
+
+  gemma-alt:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8002/v1"
+    api_key: "skip"
+
+  qwen:
+    full_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  phi:
+    full_name: "microsoft/Phi-3.5-vision-instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  llama:
+    full_name: "meta-llama/Llama-3.2-11B-Vision-Instruct"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+
+
+# Inference Settings
+inference:
+  temperature: 0.2
+  max_tokens_instruction: 150
+  max_tokens_inference: 150
+
+
+# Experiment Settings
+experiment:
+  top_k_retrieval: [1, 2, 3, 5]
+  max_workers: 20
+  clip_model: "ViT-B-32"
+
+
+# Output Paths
+output:
+  embeddings_path: "data/clip_embeddings_train.npy"
+  test_embeddings_path: "data/clip_embeddings_test.npy"
+  instruction_base_dir: "instruction/"
+  image_base_dir: "image/"
+  results_dir: "results/"
+  figures_dir: "results/figures/"
+  hybrid_dir: "hybrid/"
+  hybrid_new_dir: "hybrid_new/"
+
+
+# Prompts
+prompts:
+ 
+  instruction_generation: |
+    You are an expert in aircraft recognition and fine-grained visual analysis. Your task is to generate generalizable identification rules for an aircraft variant from the FGVC Aircraft dataset that can be applied to ANY image of this aircraft variant — not just the example shown.
+
+    Aircraft Variant: {label}
+
+    Generate exactly 3 identification rules in the following format:
+    1. To identify [aircraft variant], look for [general visual cue — engine count and mounting position (under-wing pylon, fuselage-mounted, tail-mounted), engine nacelle shape (perfect circle vs flat-bottom), overall fuselage proportions, wing sweep/configuration, tail design (T-tail, cruciform, conventional, twin-tail), or nose profile (pointed, blunt, drooped)]
+    2. To distinguish from similar variants in the same family, focus on [the most reliable fine-grained cue — fuselage length measured by door/exit pattern and window count between doors, winglet style (none, wingtip fence, blended winglet, sharklet, split scimitar, raked tip), engine generation (e.g. CFM56 vs LEAP, JT8D vs CFM56), APU exhaust shape, or tail-cone taper (Airbus straight-top vs Boeing symmetric)]
+    3. To avoid misclassification, check [the most common confused variant — typically same-family siblings differing only in length/engines/winglets, or a rival manufacturer's equivalent — and the single visual feature that resolves it]
+
+    Rules must be:
+    - General enough to apply to any image of {label}, not just this one
+    - Focused on livery-independent structural cues (do NOT rely on paint scheme, airline colors, titles, or registration markings)
+    - Concise — one sentence each
+
+    Do not write paragraphs. Do not describe this specific image. Do not ask questions.
+
+  simple_caption_generation: |
+    You are an expert in aircraft recognition and fine-grained visual analysis. Generate a simple one-sentence caption for the aircraft variant shown in the image.
+
+    Aircraft Variant: {label}
+
+    Write a single sentence in the format: "This is [variant], which typically has [2-3 key visual features]."
+
+    Do not write more than one sentence. Do not describe this specific image. Do not ask questions.
+
+  caption_system: |
+    You are an expert aircraft classifier. Below are brief descriptions of aircraft variants similar to the target image. Study them carefully before classifying.
+
+  caption_target: |
+    Using the variant descriptions above, classify the following aircraft image.
+    Provide only the variant name. Do not output anything else.
+
+  unstructured_paragraph_generation: |
+    You are an expert in aircraft recognition and fine-grained visual analysis. Describe the visual appearance of the aircraft variant shown in the image in a short paragraph.
+
+    Aircraft Variant: {label}
+
+    Write 2-3 natural sentences covering engine characteristics, fuselage shape, wing configuration, and any distinctive features observable in aircraft photography. Be descriptive and specific to this variant.
+
+    Do not use bullet points or numbered lists. Do not describe this specific image. Do not ask questions.
+
+  paragraph_system: |
+    You are an expert in aircraft recognition. Below are visual descriptions of aircraft variants similar to the target image. Study them carefully before classifying.
+
+  paragraph_target: |
+    Using the variant descriptions above, classify the following aircraft image.
+    Provide only the variant name. Do not output anything else.
+
+  single_rule_generation: |
+    You are an expert in ircraft recognition. Generate a single discriminative identification rule for the aircraft variant shown in the image.
+
+    Aircraft Variant: {label}
+
+    Generate exactly 1 rule in the following format:
+    To distinguish [variant] from similar variants, focus on [key differentiating visual characteristic].
+
+    The rule must be concise — one sentence. Focus on the most visually distinctive feature that separates this variant from others it is commonly confused with.
+
+    Do not write more than one rule. Do not describe this specific image. Do not ask questions.
+
+  single_rule_system: |
+    You are an expert aircraft classifier. Below are discriminative identification rules for aircraft variants similar to the target image. Study them carefully before classifying.
+
+  single_rule_target: |
+    Apply the discriminative rules above to classify the following aircraft image.
+    Provide only the variant name. Do not output anything else.
+
+  zero_shot: |
+    Identify the aircraft variant shown in the image.
+    Provide only the aircraft variant name from the FGVC Aircraft dataset. Do not output the company name or anything else.
+
+  few_shot_system: |
+    You are an expert aircraft recognition system trained on visual properties of diverse aircraft variants. Study the following example images carefully.
+
+  few_shot_example: |
+    Example {idx}:
+    Variant: {label}
+
+  few_shot_target: |
+    Now classify the aircraft variant in the following image.
+    Provide only the aircraft variant name. Do not output company name or anything else.
+
+  approach1_system: |
+    You are an expert aircraft classifier. Below are reasoning instructions derived from FGVC Aircraft images that are visually similar to the target image. Go through them carefully in order to classify the target image.
+
+  approach1_example: |
+    Instruction {idx}:
+    Variant: {label}
+    Instruction: {instruction}
+
+  approach1_target: |
+    Apply the above reasoning strategies to classify the following image into an FGVC Aircraft variant name. Focus on livery-independent structural cues — engine count and mounting (under-wing, fuselage, tail), engine nacelle shape (round vs flat-bottom), winglet style (fence, sharklet, blended, split scimitar, raked, none), fuselage length judged by door/exit pattern and window count between doors, tail configuration (T-tail, cruciform, conventional), and nose profile — and relate them to the instructions provided. Ignore paint scheme and airline titles.
+    Provide only the aircraft variant name only and not the company name, similar to what is mentioned in the instructions provided. Generally it is the same as the variant of the first retrieved instruction.
+
+  hybrid_system: |
+    You are an expert in fine-grained aircraft classification. You will be given two types of in-context examples:
+    1. Visual examples: images paired with their correct aircraft variant name.
+    2. Reasoning instructions: text-based strategies derived from visually similar FGVC Aircraft images, describing how to identify the aircraft variant.
+    Your goal is to correctly identify the aircraft variant of the target image. Study all examples and instructions carefully before answering.
+
+  hybrid_image_example: |
+    Example {idx}:
+    Variant: {label}
+
+  hybrid_instruction_example: |
+    Instruction Example {idx}:
+    Variant: {label}
+    Instruction: {instruction}
+
+  hybrid_target: |
+    Now predict the aircraft variant name using both the visual examples and reasoning strategies above. Compare structural cues — engine count/mounting and nacelle shape, winglet style, fuselage length (door/window pattern), tail configuration, nose profile — across the target and the examples; ignore paint scheme and airline titles. Provide only the aircraft variant name and not the company name, do not output anything else. Use the visual examples and the instructions to answer based on the target image only. Do not get confused with the example images.
+    Give the exact aircraft variant name. Do not give a generic description. It is the same as the variant of the first retrieved example.
+
+  hybrid_new_system: |
+    You are an expert in fine-grained aircraft classification. You will be given two types of in-context examples:
+    1. Reasoning instructions: text-based strategies derived from visually similar images from the FGVC Aircraft dataset, describing how to identify the aircraft variant.
+    2. Visual examples: images paired with their correct aircraft variant name.
+    Your primary guidance comes from the reasoning instructions. Use the visual examples as supplementary evidence. Study all instructions and examples carefully before answering.
+
+  hybrid_new_image_example: |
+    Visual Example {idx}:
+    Variant: {label}
+
+  hybrid_new_instruction_example: |
+    Reasoning Instruction {idx}:
+    Variant: {label}
+    Instruction: {instruction}
+
+  hybrid_new_target: |
+    Now predict the aircraft variant name using the reasoning instructions and visual examples above. Apply the reasoning strategies first — checking engine count/mounting and nacelle shape, winglet style, fuselage length (door/window pattern), tail configuration, and nose profile — then use the visual examples to confirm; ignore paint scheme and airline titles. Provide only the aircraft variant name, do not output anything else. Do not get confused with the example images.
+    Give the exact aircraft variant name and not the company name. Do not give a generic description. 
