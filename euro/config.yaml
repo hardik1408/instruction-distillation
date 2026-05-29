@@ -1,0 +1,187 @@
+# Dataset Paths
+dataset:
+  eurosat_test_annotations_path: "data/eurosat_test_annotations.json"
+  eurosat_train_annotations_path: "data/eurosat_train_annotations.json"
+
+  eurosat_images_dir: "EuroSAT"
+
+  images_per_class: 100
+  images_per_class_debug: 5
+
+
+# Model Configuration
+models:
+  gemma:
+    full_name: "google/gemma-3-4b-it"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  qwen:
+    full_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  phi:
+    full_name: "microsoft/Phi-3.5-vision-instruct"
+    api_base: "http://localhost:8000/v1"
+    api_key: "skip"
+
+  llama:
+    full_name: "meta-llama/Llama-3.2-11B-Vision-Instruct"
+    api_base: "http://localhost:8003/v1"
+    api_key: "skip"
+
+
+# Inference Settings
+inference:
+  temperature: 0.2
+  max_tokens_instruction: 150
+  max_tokens_inference: 150
+
+
+# Experiment Settings
+experiment:
+  top_k_retrieval: [1, 2, 3, 5]
+  max_workers: 12
+  clip_model: "ViT-B-32"
+
+
+# Output Paths
+output:
+  embeddings_path: "data/clip_embeddings_train.npy"
+  test_embeddings_path: "data/clip_embeddings_test.npy"
+  instruction_base_dir: "instruction/"
+  image_base_dir: "image/"
+  results_dir: "results/"
+  figures_dir: "results/figures/"
+  hybrid_dir: "hybrid/"
+  hybrid_new_dir: "hybrid_new/"
+
+
+# Prompts
+prompts:
+  # Instruction generation prompt for EuroSAT dataset
+  # instruction_generation: |
+  #   You are an expert in remote sensing and satellite image interpretation. Analyze this example and create a generalizable strategy for identifying and describing land-use and land-cover classes from satellite imagery.
+
+  #   Land-Use Class: {label}
+
+  #   Think step-by-step:
+  #   1. What visual features are most distinctive for identifying this land-use class?
+  #     - Color and spectral appearance (vegetation index, water reflectance, urban albedo)
+  #     - Texture patterns (uniform, granular, structured, irregular)
+  #     - Geometric shapes and spatial arrangement (grid patterns, curved boundaries, linear features)
+  #     - Scale and density of structures or natural features
+  #     - Contrast with neighboring land-use regions
+
+  #   2. What is the best approach to describe this satellite image class accurately?
+  #     - Starting point: dominant color and texture signature
+  #     - Key spatial patterns that distinguish this class from visually similar ones
+  #     - Level of detail needed (coarse land-cover vs fine-grained land-use)
+
+  #   3. What common mistakes should be avoided?
+  #     - Confusing spectrally similar classes (e.g., pasture vs permanent crop, river vs highway)
+  #     - Overlooking texture and geometric cues when color alone is ambiguous
+  #     - Misidentifying based on lighting conditions or seasonal variation
+
+  #   Synthesize into 3-4 sentences describing:
+  #   - What visual and spectral cues to focus on for identifying {label} or similar land-use classes
+  #   - What describing approach works best for this type of satellite image
+  #   - What common errors to avoid when distinguishing fine-grained land-use differences
+
+  #   Generate an identification and description strategy (not a caption). Do not ask any questions at last.:
+  instruction_generation: |
+    You are an expert in satellite image interpretation and remote sensing. Your task is to generate generalizable identification rules for a land use/land cover class that can be applied to ANY satellite image of this type — not just the example shown.
+
+    Land Use/Land Cover Class: {label}
+
+    Generate exactly 3 identification rules in the following format:
+    1. To identify the [feature], look for [general visual cue]
+    2. To distinguish from similar classes, focus on [differentiating characteristic]
+    3. To avoid misclassification, check [common confusion point and how to resolve it]
+
+    Rules must be:
+    - General enough to apply to any satellite image of {label}, not just this one
+    - Focused on spectral and spatial features visible in overhead imagery (texture, color tone, shape, pattern, layout)
+    - Concise — one sentence each
+
+    Do not write paragraphs. Do not describe this specific image. Do not ask questions.
+
+  zero_shot: |
+    Identify the land-use class shown in the satellite image.
+    Provide only the class name. Do not output anything at all.
+
+
+  few_shot_system: |
+    You are an expert image classifier for satellite remote sensing images. Study the following examples carefully.
+
+
+  few_shot_example: |
+    Example {idx}:
+    Class: {label}
+
+
+  few_shot_target: |
+    Now classify the following satellite image.
+    Provide only the class name. Do not output anything at all.
+
+
+  approach1_system: |
+    You are an expert satellite image classifier. Below are reasoning instructions derived from satellite images from EuroSAT dataset similar to the target image. Go through them carefully in order to classify the target image.
+
+
+  approach1_example: |
+    Instruction {idx}:
+    Label: {label}
+    Instruction: {instruction}
+
+
+  approach1_target: |
+    Apply the above reasoning strategies to classify the following image into a land-use class name. Relate the image with the instructions provided.
+    Provide only the class name, similar to what is mentioned in the instructions provided. Generally it is same as the label of first retrieved instruction.
+
+
+  hybrid_system: |
+    You are an expert in fine-grained satellite image classification. You will be given two types of in-context examples:
+    1. Visual examples: satellite images paired with their correct land-use class name.
+    2. Reasoning instructions: text-based strategies derived from visually similar satellite images, describing how to identify the class name.
+    Your goal is to correctly find the land-use class name of the target image. Study all examples and instructions carefully before answering.
+
+
+  hybrid_image_example: |
+    Example {idx}:
+    Class: {label}
+
+
+  hybrid_instruction_example: |
+    Instruction Example {idx}
+    Label: {label}
+    Instruction: {instruction}
+
+
+  hybrid_target: |
+    Now predict the land-use class name using both the visual examples and reasoning strategies above. Provide only the class name, do not output anything else. Use the visual examples and the instructions to answer the question based on the target image only. Do not get confused with the example images.
+    Give the exact land-use class name. Do not give a generic description. It is same as the label of first retrieved example.
+
+
+  hybrid_new_system: |
+    You are an expert in fine-grained satellite image classification. You will be given two types of in-context examples:
+    1. Reasoning instructions: text-based strategies derived from visually similar satellite images, describing how to identify the class name.
+    2. Visual examples: satellite images paired with their correct land-use class name.
+    Your primary guidance comes from the reasoning instructions. Use the visual examples as supplementary evidence. Study all instructions and examples carefully before answering.
+
+
+  hybrid_new_image_example: |
+    Visual Example {idx}:
+    Class: {label}
+
+
+  hybrid_new_instruction_example: |
+    Reasoning Instruction {idx}:
+    Label: {label}
+    Instruction: {instruction}
+
+
+  hybrid_new_target: |
+    Now predict the land-use class name using the reasoning instructions and visual examples above. Provide only the class name, do not output anything else. Apply the reasoning strategies first, then use the visual examples to confirm. Do not get confused with the example images.
+    Give the exact land-use class name. Do not give a generic description. It is same as the label of the first retrieved instruction.
