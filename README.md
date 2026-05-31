@@ -1,26 +1,27 @@
 # Instruction Distillation: Text Instructions as Visual Examples
 
-A research codebase exploring whether **text-based reasoning instructions** can replace **visual examples** in few-shot image classification with Vision-Language Models (VLMs).
+## Abstract
 
-## Overview
-
-Standard few-shot classification provides a VLM with example images at inference time. This project investigates an alternative: use a VLM to generate natural-language reasoning rules (instructions) for training images, then retrieve and pass those text instructions to classify unseen test images — without sending any example images.
-
-**Pipeline:**
-
-1. **Instruction Generation** (`instruction_manual.py`) — For each training image, prompt a VLM to produce 3 actionable classification rules grounded in visible perceptual properties.
-2. **CLIP Embedding** (`clip.py`) — Encode all train and test images with CLIP to enable retrieval.
-3. **Instruction Distillation Inference** (`instr_dist.py`) — At test time, retrieve the K most similar training images via CLIP cosine similarity, fetch their stored text instructions, and pass those instructions (no images) as in-context examples to classify the test image.
+Visual in-context learning (ICL) with multimodal large language models (MLLMs) is effective for fine-grained visual classification, but each retrieved image example consumes several hundred context tokens, making large-K settings prohibitively expensive at inference scale. We propose instruction distillation: an offline procedure in which the MLLM itself
+generates, for each individual training image, a structured identification instruction encoding general appearance cues, features that differen-
+tiate the class from visually similar ones, and a common confusion point. Unlike prior work that produces a single description per class, our instructions are generated per training image, preserving the intra-class visual diversity that per-class descriptions collapse. At inference time, we study five configurations sharing a single CLIP retrieval index: zero-shot, image ICL, instruction-only ICL, and two hybrid vari-
+ants in which retrieved neighbors are split between images and instructions. Across seven fine-grained benchmarks and two MLLM backbones, instruction based pipelines matches, or
+exceeds image ICL at K=1 and reduces perquery tokens by 2.9× at K=5. Hybrid configurations further show that visual and textual ICL
+signals are complementary, images gives visual
+patterns to learn and see, while instructions
+give explicit rule and logic. When both of these
+are provided, the quality of context improves,
+which is noticeable in the performance.
 
 ## Approaches
 
 | Script | Method | In-context examples |
 |--------|--------|---------------------|
-| `zero_shot.py` | Zero-shot | None |
-| `few_shot.py` | Visual few-shot | K example images |
-| `instr_dist.py` | Instruction distillation | K text instructions |
-| `hybrid.py` | Hybrid (images-first) | K images + K' instructions |
-| `hybrid_new.py` | Hybrid (instructions-first) | K' instructions + K images |
+| `zero_shot.py` | Zero-shot(P0) | None |
+| `few_shot.py` | Visual few-shot(P1) | K example images |
+| `instr_dist.py` | Instruction distillation(P2) | K text instructions |
+| `hybrid.py` | Hybrid (images-first)(P3) | K images + K' instructions |
+| `hybrid_new.py` | Hybrid (instructions-first)(P4) | K' instructions + K images |
 
 ## Datasets
 
@@ -36,14 +37,16 @@ Each dataset lives in its own directory with identical scripts and a `config.yam
 | `pets/` | Oxford-IIIT Pets |
 | `sun/` | SUN397 |
 
-## Models
+## Requirements
 
-Models are served locally via an OpenAI-compatible API (e.g., vLLM). Supported models are configured in each `config.yaml`:
-
-| Key | Model |
-|-----|-------|
-| `qwen` | Qwen/Qwen2.5-VL-7B-Instruct |
-| `gemma` | google/gemma-3-4b-it |
+```
+openai
+numpy
+scikit-learn
+open_clip_torch (or clip)
+pyyaml
+tqdm
+```
 
 ## Usage
 
@@ -103,28 +106,20 @@ experiment:
   clip_model: "ViT-B-32"
 ```
 
-## Requirements
+## Evaluation
 
-```
-openai
-numpy
-scikit-learn
-open_clip_torch (or clip)
-pyyaml
-tqdm
+Each dataset directory contains an `eval.py` script that scores a predictions JSON file produced by any of the inference scripts.
+
+```bash
+python eval.py --p <path/to/predictions.json> --o <path/to/output_results.json>
 ```
 
-## Output Structure
+**Metrics computed:**
 
-```
-<dataset>/
-  data/
-    clip_embeddings_train.npy
-    clip_embeddings_test.npy
-  instruction/<model>/
-    per_image_instructions.json      # generated training instructions
-    predictions_few_shot_<k>.json    # inference results
-  image/<model>/
-    predictions_zero_shot.json
-  results/
-```
+| Metric | Description |
+|--------|-------------|
+| **Top-1 Accuracy** | Fraction of test images where the top prediction exactly matches the ground-truth label. |
+| **Mean Per-Class Accuracy** | Macro-average of per-class accuracies — the primary reported metric. Treats every class equally regardless of how many test images it has, making it robust to class imbalance. |
+
+Label comparison is case-insensitive and normalizes punctuation (underscores, hyphens, and curly apostrophes are collapsed to spaces) so that `american_bulldog`, `American Bulldog`, and `american bulldog` all match.
+
